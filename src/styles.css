@@ -27,6 +27,33 @@
   padding: 24px;
 }
 
+.overlay {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: var(--onbackground);
+  opacity: var(--elevation);
+}
+
+.overlay:hover {
+  opacity: var(--hover);
+}
+
+.br6 {
+  border-radius: 6px;
+}
+
+.br10 {
+  border-radius: 10px;
+}
+
+.elev {
+  opacity: var(--hover);
+}
+
 /* ROOT */
 
 .app {
@@ -36,6 +63,7 @@
 }
 
 .sidebar {
+  position: relative;
   display: flex;
   flex-direction: column;
   border: 1px solid transparent;
@@ -97,28 +125,6 @@
   width: 344px;
   padding: 16px;
   background-color: var(--background);
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.overlay {
-  position: absolute;
-  z-index: 1;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  border-radius: 10px;
-  background-color: var(--onbackground);
-  opacity: var(--elevation);
-}
-
-.overlay:hover {
-  opacity: var(--hover);
-}
-
-.overlay:active {
-  opacity: var(--elevation);
 }
 
 .disabled {
@@ -156,33 +162,25 @@
 
 /* CONTENTS */
 
-.tree-node-wrapper {
-  display: flex;
-  flex-direction: column;
-}
-
 .tree-view {
   display: flex;
   flex-direction: column;
+  row-gap: 4px;
 }
 
 .tree-node {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
+  position: relative;
 }
 
-.tree-node__mark {
-  height: 1.5rem;
+.tree-node__active-mark {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
   width: 4px;
   border-radius: 2px;
-  border: 1px solid transparent;
-  background-color: transparent;
-}
-
-.tree-node__mark_active {
   background-color: #1adcff;
+  visibility: hidden;
 }
 
 .tree-node__link {
@@ -190,19 +188,16 @@
   flex-direction: row;
   gap: 10px;
   align-items: center;
-  padding: 6px;
+  padding: 6px 10px 6px 10px;
   border-radius: 6px;
-  flex: 2;
-}
-
-.tree-node__link:hover {
-  background-color: rgba(213, 213, 213, 0.3);
 }
 
 .tree-node__icon {
   height: 1rem;
   width: 1rem;
-  justify-self: center;
+}
+.show {
+  visibility: visible;
 }
 
 /* NOTES */

@@ -23,34 +23,33 @@ function TreeNode({ node }) {
     setIsOpen(!isOpen);
   }
 
+  function toggleActive() {
+    setIsActive(!isActive);
+  }
+
   function isChildren() {
     return children != null;
   }
 
   return (
-    <div className="tree-node-wrapper">
-      <div className="tree-node">
-        <div
-          className={`tree-node__mark ${
-            isActive ? "tree-node__mark_active" : ""
-          }`}
-        ></div>
-        <Link
-          className="tree-node__link"
-          onClick={isChildren() ? toggleOpen : null}
-        >
-          <img
-            className="tree-node__icon"
-            src={isChildren() ? ArrowIcon : ""}
-            alt=" "
-          ></img>
-          <img
-            className="tree-node__icon"
-            src={isChildren() ? FolderIcon : FileIcon}
-          ></img>
-          <div className="tree-node__text">{label}</div>
-        </Link>
-      </div>
+    <div className="tree-node">
+      <div className={`tree-node__active-mark ${isActive ? "show" : ""}`}></div>
+      <Link
+        className="tree-node__link"
+        onClick={isChildren() ? toggleOpen : toggleActive}
+      >
+        <div className={`overlay br6 ${isActive ? "elev" : ""}`}></div>
+        <img
+          className="tree-node__icon"
+          src={isChildren() ? ArrowIcon : ""}
+          alt=" "
+        ></img>
+        <img
+          className="tree-node__icon"
+          src={isChildren() ? FolderIcon : FileIcon}
+        ></img>
+        <p className="tree-node__text">{label}</p>
+      </Link>
       {isOpen && <TreeView data={children} />}
     </div>
   );
