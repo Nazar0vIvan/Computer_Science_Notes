@@ -1,0 +1,208 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Serif:opsz@8..144&display=swap");
+
+:root {
+  --background: #121212;
+  --onbackground: #fff;
+  --high: 0.87;
+  --medium: 0.6;
+  --disabled: 0.38;
+  --elevation: 0.05;
+  --hover: 0.1;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+  color: var(--onbackground);
+}
+
+.container {
+  padding: 24px;
+}
+
+/* ROOT */
+
+.app {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid transparent;
+  max-width: fit-content;
+  min-width: 150px;
+  overflow: hidden;
+  align-items: start;
+  background-color: var(--background);
+}
+
+.handler {
+  position: relative;
+  width: 2px;
+  background-color: #313131;
+  transition: transform 0.2s;
+}
+
+.handler::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -2px;
+  width: 6px;
+  visibility: none;
+}
+
+.cursor_resize_h {
+  cursor: col-resize;
+}
+
+.handler:hover {
+  transform: scaleX(2);
+  cursor: col-resize;
+}
+
+.notes {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: var(--background);
+  flex: 1;
+}
+
+/* CARDS */
+
+.cards-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 14px;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  width: 344px;
+  padding: 16px;
+  background-color: var(--background);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 10px;
+  background-color: var(--onbackground);
+  opacity: var(--elevation);
+}
+
+.overlay:hover {
+  opacity: var(--hover);
+}
+
+.overlay:active {
+  opacity: var(--elevation);
+}
+
+.disabled {
+  pointer-events: none;
+}
+
+.card__text-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.card__text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: var(--onbackground);
+  opacity: var(--high);
+}
+
+.card__title {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.card__desc {
+  opacity: var(--medium);
+  line-height: 1.4rem;
+}
+
+.card__icon {
+  width: 80px;
+  height: 80px;
+}
+
+/* CONTENTS */
+
+.tree-node-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.tree-view {
+  display: flex;
+  flex-direction: column;
+}
+
+.tree-node {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.tree-node__mark {
+  height: 1.5rem;
+  width: 4px;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  background-color: transparent;
+}
+
+.tree-node__mark_active {
+  background-color: #1adcff;
+}
+
+.tree-node__link {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  padding: 6px;
+  border-radius: 6px;
+  flex: 2;
+}
+
+.tree-node__link:hover {
+  background-color: rgba(213, 213, 213, 0.3);
+}
+
+.tree-node__icon {
+  height: 1rem;
+  width: 1rem;
+  justify-self: center;
+}
+
+/* NOTES */

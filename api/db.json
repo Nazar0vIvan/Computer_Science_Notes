@@ -1,0 +1,61 @@
+{
+  "cards": [
+    {
+      "cardId": 0,
+      "title": "React",
+      "desc": "Library for web and native user interfaces",
+      "icon": "../logo-react.png",
+      "path": "react"
+    },
+    {
+      "cardId": 1,
+      "title": "JavaScript",
+      "desc": "Scripting language to implement complex features on web pages",
+      "icon": "../logo-js.png",
+      "path": "javascript"
+    },
+    {
+      "cardId": 2,
+      "title": "C++",
+      "desc": "Generic language designed to humiliate generic people",
+      "icon": "../logo-cpp.png",
+      "path": "cpp"
+    }
+  ],
+  "reactContents": [
+    {
+      "key": "root",
+      "label": "Основные концепции"
+    },
+    {
+      "key": "1",
+      "label": "Элементы, компоненты и JSX",
+      "children": [
+        {
+          "key": "1-0",
+          "label": "Функциональный компонент"
+        },
+        {
+          "key": "1-1",
+          "label": "Классовый компонент"
+        },
+        {
+          "key": "1-2",
+          "label": "Фрагменты"
+        },
+        {
+          "key": "1-3",
+          "label": "Свойства компонента"
+        }
+      ]
+    },
+    {
+      "key": "2",
+      "label": "Хуки"
+    },
+    {
+      "key": "3",
+      "label": "Vite.js"
+    }
+  ]
+}
