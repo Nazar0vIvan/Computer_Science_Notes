@@ -49,7 +49,6 @@
   opacity: var(--elevation);
 }
 
-
 /* ROOT */
 
 .app {
@@ -157,8 +156,6 @@
   height: 80px;
 }
 
-
-
 /* CONTENTS */
 
 .tree-view {
@@ -169,7 +166,6 @@
 .tree-node {
   position: relative;
   /*margin-left: calc(1rem + 8px);*/
-
 }
 
 .tree-node__overlay {
@@ -187,10 +183,10 @@
 }
 
 .tree-node__active-mark {
-  position: relative;
+  position: absolute;
   left: 0;
-  top: 0;
-  height: 2rem;
+  top: calc(50% - 0.75rem);
+  height: 1.5rem;
   width: 4px;
   border-radius: 2px;
   background-color: #1adcff;

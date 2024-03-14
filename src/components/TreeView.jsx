@@ -26,28 +26,26 @@ function TreeNode({ node }) {
     return children != null;
   }
   /*
-  <div
-  className={`tree-node__overlay elev-off ${isActive ? "elev" : ""}`}
-></div>
+<div className={`tree-node__active-mark ${isActive ? "show" : ""}`}></div>
   */
   return (
-    <div style={{ display: "inline-flex" }}>
-      <div className={`tree-node__active-mark ${isActive ? "show" : ""}`}></div>
-      <div className="tree-node">
-        <Link className="tree-node__link" onClick={toggleActive}>
-          <img
-            className="tree-node__icon"
-            src={isChildren() ? ArrowIcon : ""}
-            alt=" "
-          ></img>
-          <img
-            className="tree-node__icon"
-            src={isChildren() ? FolderIcon : FileIcon}
-          ></img>
-          <p className="tree-node__text">{label}</p>
-        </Link>
-        {isActive && isChildren() && <TreeView data={children} />}
-      </div>
+    <div className="tree-node">
+      <Link className="tree-node__link" onClick={toggleActive}>
+        <div
+          className={`tree-node__overlay ${isActive ? "elev" : "elev-off"}`}
+        ></div>
+        <img
+          className="tree-node__icon"
+          src={isChildren() ? ArrowIcon : ""}
+          alt=" "
+        ></img>
+        <img
+          className="tree-node__icon"
+          src={isChildren() ? FolderIcon : FileIcon}
+        ></img>
+        <p className="tree-node__text">{label}</p>
+      </Link>
+      {isActive && isChildren() && <TreeView data={children} />}
     </div>
   );
 }
