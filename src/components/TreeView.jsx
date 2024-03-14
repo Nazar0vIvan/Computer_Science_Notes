@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import ArrowIcon from "./arrow.svg";
 import FileIcon from "./file.svg";
@@ -15,8 +15,9 @@ export function TreeView({ data }) {
 }
 
 function TreeNode({ node }) {
+  const linkRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
-  const { children, label } = node;
+  const { key, label, children } = node;
 
   function toggleActive() {
     setIsActive(!isActive);
@@ -25,12 +26,18 @@ function TreeNode({ node }) {
   function isChildren() {
     return children != null;
   }
+
+  useEffect(() => {
+    const level = (key.match(/-/g) || []).length;
+    linkRef.current.style.paddingLeft = `${level * 12}px`;
+  }, [key]);
+
   /*
 <div className={`tree-node__active-mark ${isActive ? "show" : ""}`}></div>
   */
   return (
     <div className="tree-node">
-      <Link className="tree-node__link" onClick={toggleActive}>
+      <Link ref={linkRef} className="tree-node__link" onClick={toggleActive}>
         <div
           className={`tree-node__overlay ${isActive ? "elev" : "elev-off"}`}
         ></div>

@@ -165,7 +165,6 @@
 
 .tree-node {
   position: relative;
-  /*margin-left: calc(1rem + 8px);*/
 }
 
 .tree-node__overlay {
