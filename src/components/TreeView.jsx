@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import ArrowIcon from "./arrow.svg";
 import FileIcon from "./file.svg";
@@ -15,32 +15,28 @@ export function TreeView({ data }) {
 }
 
 function TreeNode({ node }) {
-  const linkRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
   const { key, label, children } = node;
 
-  function toggleActive() {
+  const toggleActive = useCallback(() => {
     setIsActive(!isActive);
-  }
+  }, [isActive]);
 
-  function isChildren() {
+  const isChildren = useCallback(() => {
     return children != null;
-  }
+  }, [children]);
 
-  useEffect(() => {
-    const level = (key.match(/-/g) || []).length;
-    linkRef.current.style.paddingLeft = `${level * 12}px`;
+  const getNodeLevel = useCallback(() => {
+    return (key.match(/-/g) || []).length;
   }, [key]);
 
-  /*
-<div className={`tree-node__active-mark ${isActive ? "show" : ""}`}></div>
-  */
   return (
-    <div className="tree-node">
-      <Link ref={linkRef} className="tree-node__link" onClick={toggleActive}>
-        <div
-          className={`tree-node__overlay ${isActive ? "elev" : "elev-off"}`}
-        ></div>
+    <div
+      className="tree-node"
+      style={{ position: "relative", "--level": getNodeLevel() }}
+    >
+      <div className={`tree-node__active-mark ${isActive ? "show" : ""}`}></div>
+      <Link className="tree-node__link" onClick={toggleActive}>
         <img
           className="tree-node__icon"
           src={isChildren() ? ArrowIcon : ""}
@@ -50,7 +46,7 @@ function TreeNode({ node }) {
           className="tree-node__icon"
           src={isChildren() ? FolderIcon : FileIcon}
         ></img>
-        <p className="tree-node__text">{label}</p>
+        <p>{label}</p>
       </Link>
       {isActive && isChildren() && <TreeView data={children} />}
     </div>

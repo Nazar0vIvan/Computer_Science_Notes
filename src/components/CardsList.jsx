@@ -10,7 +10,11 @@ export function CardsList() {
       {cards.map((card) => {
         const { cardId, title, desc, icon, path } = card;
         return (
-          <Link key={cardId} to={path} className={isResizing ? "disabled" : ""}>
+          <Link
+            key={cardId}
+            to={path}
+            className={isResizing ? "mouse-disabled" : ""}
+          >
             <Card title={title} desc={desc} icon={icon} />
           </Link>
         );
