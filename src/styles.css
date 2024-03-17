@@ -5,6 +5,7 @@
   --color-background-elevation-1: #1e1e1e;
   --color-background-hover: #272727;
   --color-onbackground: #fff;
+  --color-handler-active: #0078d4;
   --text-elevation-high: 0.87;
   --text-elevation-medium: 0.6;
   --text-elevation-disabled: 0.38;
@@ -64,14 +65,22 @@
   visibility: none;
 }
 
+.handler:hover {
+  transform: scaleX(2);
+  cursor: col-resize;
+  background-color: var(--color-handler-active);
+}
+
+.handler_resize {
+  transform: scaleX(2);
+  background-color: var(--color-handler-active);
+}
+
 .cursor_resize_h {
   cursor: col-resize;
 }
 
-.handler:hover {
-  transform: scaleX(2);
-  cursor: col-resize;
-}
+
 
 .notes {
   display: flex;
@@ -108,13 +117,13 @@
 .card__text-container {
   display: flex;
   flex-direction: row;
-  gap: 16px;
+  column-gap: 16px;
 }
 
 .card__text {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  row-gap: 10px;
   opacity: var(--text-elevation-high);
 }
 
@@ -140,9 +149,15 @@
   flex-direction: column;
 }
 
+.tree-node {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 6px;
+}
+
 .tree-node__active-mark {
-  position: absolute;
-  height: 1rem;
+  height: 1.5rem;
   width: 4px;
   border-radius: 2px;
   background-color: #1adcff;
@@ -154,11 +169,20 @@
   flex-direction: row;
   column-gap: 8px;
   align-items: center;
-  padding: 6px 12px 6px calc(var(--level) * (1rem + 8px));
+  padding: 6px 12px 6px calc(var(--level) * (1rem + 8px) + 8px);
+  flex-basis: 100%;
 }
 
 .tree-node__link:hover {
   background-color: var(--color-background-hover);
+}
+
+.tree-node__link_active {
+  background-color: var(--color-background-elevation-1);
+}
+
+.tree-node__icon_active {
+  transform: rotate(90deg);
 }
 
 .tree-node__icon {

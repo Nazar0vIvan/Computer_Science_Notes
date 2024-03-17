@@ -13,7 +13,7 @@ export function RootLayout() {
     <div className={`app ${isResizing ? "cursor_resize_h" : ""}`}>
       <Sidebar isResizing={isResizing} stopResizing={stopResizing} />
       <div
-        className="handler"
+        className={`handler ${isResizing ? "handler_resize" : ""}`}
         onMouseDown={() => {
           setIsResizing(true);
         }}
