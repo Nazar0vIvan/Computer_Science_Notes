@@ -1,16 +1,20 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { TreeView } from "./TreeView/TreeView";
 import { useLoaderData } from "react-router-dom";
 import { getContents } from "../../api/contents";
 
 export function Contents() {
   const contents = useLoaderData();
-  const treeRef = useRef();
-  const [activeNode, setActiveNode] = useState("0");
+  const [activeNodeKey, setActiveNodeKey] = useState("0");
+  const treeRef = React.createRef();
 
   useEffect(() => {
     console.log(treeRef.current);
   }, []);
+
+  const onActiveNodeChanged = useCallback((key) => {
+    setActiveNodeKey(key);
+  });
 
   return <TreeView ref={treeRef} data={contents} />;
 }
