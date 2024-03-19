@@ -5,18 +5,21 @@ import { getContents } from "../../api/contents";
 
 export function Contents() {
   const contents = useLoaderData();
-  const [activeNodeKey, setActiveNodeKey] = useState("0");
-  const treeRef = React.createRef();
+  const [activeNode, setActiveNode] = useState("0");
 
-  useEffect(() => {
-    console.log(treeRef.current);
-  }, []);
+  /*
+  const toggleActiveNode = useCallback(() => {
+    setActiveNode(!activeNode);
+  }, [activeNode]);
+  */
 
-  const onActiveNodeChanged = useCallback((key) => {
-    setActiveNodeKey(key);
-  });
-
-  return <TreeView ref={treeRef} data={contents} />;
+  return (
+    <TreeView
+      data={contents}
+      activeNode={activeNode}
+      setActiveNode={setActiveNode}
+    />
+  );
 }
 
 async function loader({ request: { url, signal } }) {

@@ -4,23 +4,23 @@ import ArrowIcon from "./arrow.svg";
 import FileIcon from "./file.svg";
 import FolderIcon from "./folder.svg";
 
-export const TreeView = forwardRef(function TreeView({ data }, ref) {
+export function TreeView({ data, activeNode, setActiveNode }) {
   return (
-    <div ref={ref} className="tree-view">
+    <div className="tree-view">
       {data.map((node) => (
-        <TreeNode key={node.key} node={node} />
+        <TreeNode
+          key={node.key}
+          node={node}
+          activeNode={activeNode}
+          onClick={setActiveNode}
+        />
       ))}
     </div>
   );
-});
+}
 
-function TreeNode({ node }) {
-  const [isActive, setIsActive] = useState(false);
+function TreeNode({ node, activeNode, onClick }) {
   const { key, label, children } = node;
-
-  const toggleActive = useCallback(() => {
-    setIsActive(!isActive);
-  }, [isActive]);
 
   const isChildren = useCallback(() => {
     return children != null;
@@ -34,17 +34,19 @@ function TreeNode({ node }) {
     <>
       <div className="tree-node" style={{ "--level": getNodeLevel() }}>
         <div
-          className={`tree-node__active-mark ${isActive ? "show" : ""}`}
+          className={`tree-node__active-mark ${
+            activeNode === key ? "show" : ""
+          }`}
         ></div>
         <Link
           className={`tree-node__link ${
-            isActive ? "tree-node__link_active" : ""
+            activeNode === key ? "tree-node__link_active" : ""
           }`}
-          onClick={toggleActive}
+          onClick={() => onClick(key)}
         >
           <img
             className={`tree-node__icon ${
-              isActive ? "tree-node__icon_active" : ""
+              activeNode === key ? "tree-node__icon_active" : ""
             }`}
             src={isChildren() ? ArrowIcon : ""}
             alt=" "
@@ -56,7 +58,13 @@ function TreeNode({ node }) {
           <p>{label}</p>
         </Link>
       </div>
-      {isActive && isChildren() && <TreeView data={children} />}
+      {activeNode === key && isChildren() && (
+        <TreeView
+          data={children}
+          activeNode={activeNode}
+          setActiveNode={onClick}
+        />
+      )}
     </>
   );
 }
