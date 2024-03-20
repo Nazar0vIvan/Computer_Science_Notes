@@ -1,7 +1,9 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { TreeView } from "./TreeView/TreeView";
 import { useLoaderData } from "react-router-dom";
 import { getContents } from "../../api/contents";
+
+export const TreeContext = createContext(null);
 
 export function Contents() {
   const contents = useLoaderData();
@@ -13,12 +15,14 @@ export function Contents() {
   }, [activeNode]);
   */
 
+  useEffect(() => {
+    console.log(activeNode);
+  }, [activeNode]);
+
   return (
-    <TreeView
-      data={contents}
-      activeNode={activeNode}
-      setActiveNode={setActiveNode}
-    />
+    <TreeContext.Provider value={{ activeNode, setActiveNode }}>
+      <TreeView data={contents} />
+    </TreeContext.Provider>
   );
 }
 
