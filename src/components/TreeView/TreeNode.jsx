@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ArrowIcon from "./arrow.svg";
 import FileIcon from "./file.svg";
@@ -8,7 +8,13 @@ import { TreeView } from "./TreeView";
 
 export function TreeNode({ node }) {
   const { activeNode, setActiveNode } = useContext(TreeContext);
+  const [isOpen, setIsOpen] = useState(false);
   const { key, label, children } = node;
+
+  const toggleIsOpen = useCallback(() => {
+    if (isOpen) return;
+    setIsOpen(!isOpen);
+  }, [isOpen]);
 
   const isChildren = useCallback(() => {
     return children != null;
@@ -38,15 +44,17 @@ export function TreeNode({ node }) {
           }`}
           onClick={() => {
             setActiveNode(key);
+            toggleIsOpen();
           }}
         >
           <img
             className={`tree-node__icon ${
-              activeNode === key ? "tree-node__icon_active" : ""
+              isOpen ? "tree-node__icon_active" : ""
             }`}
             src={isChildren() ? ArrowIcon : ""}
             alt=" "
           ></img>
+
           <img
             className="tree-node__icon"
             src={isChildren() ? FolderIcon : FileIcon}
@@ -54,7 +62,7 @@ export function TreeNode({ node }) {
           <p>{label}</p>
         </Link>
       </div>
-      {isChildren() && <TreeView data={children} />}
+      {isOpen && isChildren() && <TreeView data={children} />}
     </>
   );
 }
