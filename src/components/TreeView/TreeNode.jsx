@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import ArrowIcon from "./arrow.svg";
 import FileIcon from "./file.svg";
@@ -11,18 +11,37 @@ export function TreeNode({ node }) {
   const [isOpen, setIsOpen] = useState(false);
   const { key, label, children } = node;
 
-  const toggleIsOpen = useCallback(() => {
-    if (isOpen) return;
+  function toggleIsOpen() {
     setIsOpen(!isOpen);
-  }, [isOpen]);
+  }
 
-  const isChildren = useCallback(() => {
+  function isChildren() {
     return children != null;
-  }, [children]);
+  }
 
-  const getNodeLevel = useCallback(() => {
+  function getNodeLevel() {
     return (key.match(/-/g) || []).length;
-  }, [key]);
+  }
+
+  function isContainActiveNode() {
+    if (!isChildren()) return;
+
+    for (let i = 0; i < key.length; i++) {
+      if (activeNode[i] != key[i]) return false;
+    }
+    return true;
+  }
+
+  function handleLinkClick(e) {
+    setActiveNode(key);
+    if (!isOpen) setIsOpen(true);
+  }
+
+  function handleOpenClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleIsOpen();
+  }
 
   /*
   useEffect(() => {
@@ -34,29 +53,24 @@ export function TreeNode({ node }) {
     <>
       <div className="tree-node" style={{ "--level": getNodeLevel() }}>
         <div
-          className={`tree-node__active-mark ${
-            activeNode === key ? "show" : ""
-          }`}
+          className={`tree-node__mark ${activeNode === key && "show"}`}
         ></div>
         <Link
           className={`tree-node__link ${
-            activeNode === key ? "tree-node__link_active" : ""
-          }`}
-          onClick={() => {
-            setActiveNode(key);
-            toggleIsOpen();
-          }}
+            activeNode === key && "tree-node__link_active"
+          } ${!isChildren() && "tree-node__link_file"}`}
+          onClick={handleLinkClick}
         >
+          {isChildren() && (
+            <div className="tree-node__icon-wrapper" onClick={handleOpenClick}>
+              <img
+                className={`tree-node__icon-arrow ${isOpen && "rotate-90"}`}
+                src={ArrowIcon}
+              ></img>
+            </div>
+          )}
           <img
-            className={`tree-node__icon ${
-              isOpen ? "tree-node__icon_active" : ""
-            }`}
-            src={isChildren() ? ArrowIcon : ""}
-            alt=" "
-          ></img>
-
-          <img
-            className="tree-node__icon"
+            className="tree-node__icon-file"
             src={isChildren() ? FolderIcon : FileIcon}
           ></img>
           <p>{label}</p>
