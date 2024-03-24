@@ -9,16 +9,6 @@ export function Contents() {
   const contents = useLoaderData();
   const [activeNode, setActiveNode] = useState("0");
 
-  /*
-  const toggleActiveNode = useCallback(() => {
-    setActiveNode(!activeNode);
-  }, [activeNode]);
-  */
-
-  useEffect(() => {
-    console.log(activeNode);
-  }, [activeNode]);
-
   return (
     <TreeContext.Provider value={{ activeNode, setActiveNode }}>
       <TreeView data={contents} />

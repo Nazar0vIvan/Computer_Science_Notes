@@ -6,9 +6,9 @@ import FolderIcon from "./folder.svg";
 import { TreeContext } from "../Contents";
 import { TreeView } from "./TreeView";
 
-export function TreeNode({ node }) {
+export function TreeNode({ node, isOpenValue }) {
   const { activeNode, setActiveNode } = useContext(TreeContext);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(isOpenValue);
   const { key, label, children } = node;
 
   function toggleIsOpen() {
@@ -23,18 +23,9 @@ export function TreeNode({ node }) {
     return (key.match(/-/g) || []).length;
   }
 
-  function isContainActiveNode() {
-    if (!isChildren()) return;
-
-    for (let i = 0; i < key.length; i++) {
-      if (activeNode[i] != key[i]) return false;
-    }
-    return true;
-  }
-
   function handleLinkClick(e) {
     setActiveNode(key);
-    if (!isOpen) setIsOpen(true);
+    if (!isOpen && isChildren()) setIsOpen(true);
   }
 
   function handleOpenClick(e) {
@@ -42,12 +33,6 @@ export function TreeNode({ node }) {
     e.stopPropagation();
     toggleIsOpen();
   }
-
-  /*
-  useEffect(() => {
-    console.log(treeContext);
-  }, []);
-  */
 
   return (
     <>
@@ -76,7 +61,7 @@ export function TreeNode({ node }) {
           <p>{label}</p>
         </Link>
       </div>
-      {isOpen && isChildren() && <TreeView data={children} />}
+      {isOpen && <TreeView data={children} />}
     </>
   );
 }
