@@ -29,6 +29,10 @@
   color: var(--color-onbackground);
 }
 
+body {
+  background-color: var(--color-background);
+}
+
 .container {
   padding: 12px;
 }
@@ -97,10 +101,11 @@
 
 .cards-list {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  row-gap: 12px;
+  column-gap: 12px;
+  height: 100vh;
 }
 
 .card {
