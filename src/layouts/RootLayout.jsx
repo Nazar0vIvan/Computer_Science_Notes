@@ -1,5 +1,4 @@
 import { useCallback, useState } from "react";
-
 import { Sidebar } from "../components/Sidebar";
 
 export function RootLayout() {
@@ -10,15 +9,15 @@ export function RootLayout() {
   }, []);
 
   return (
-    <div className={`app ${isResizing ? "cursor_resize_h" : ""}`}>
+    <div className={`app ${isResizing && "cursor_resize_h"}`}>
       <Sidebar isResizing={isResizing} stopResizing={stopResizing} />
       <div
-        className={`handler ${isResizing ? "handler_resize" : ""}`}
+        className={`handler ${isResizing && "handler_resize"}`}
         onMouseDown={() => {
           setIsResizing(true);
         }}
       ></div>
-      <div className="notes container">HERE WILL BE NOTES</div>
+      <Notes />
     </div>
   );
 }
