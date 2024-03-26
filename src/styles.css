@@ -2,12 +2,12 @@
 
 :root {
   --color-background: #121212;
-  --color-background-elevation-1: #1e1e1e;
   /* overlay 5% */
-  --color-background-elevation-2: #383838;
+  --color-background-elevation-1: #1e1e1e;
   /* overlay 16% */
-  --color-background-hover: #272727;
+  --color-background-elevation-2: #383838;
   /* overlay 9% */
+  --color-background-hover: #272727;
 
   --color-onbackground: #fff;
   --color-handler-active: #0078d4;
@@ -97,6 +97,12 @@ body {
   flex: 1;
 }
 
+.home {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
 /* CARDS */
 
 .cards-list {
@@ -104,50 +110,64 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  column-gap: 12px;
-  height: 100vh;
+  column-gap: 20px;
 }
 
 .card {
-  position: relative;
   display: flex;
-  flex-direction: row;
-  gap: 16px;
-  width: 344px;
-  padding: 16px;
+  flex-direction: column;
+  row-gap: 16px;
+  align-items: center;
+  width: 400px;
+  height: 450px;
+  padding: 20px 4px 4px 4px;
+  border-radius: 10px;
   background-color: var(--color-background-elevation-1);
+  overflow: hidden;
 }
 
 .card:hover {
   background-color: var(--color-background-hover);
 }
 
-.card__text-container {
+.card__title {
   display: flex;
   flex-direction: row;
-  column-gap: 16px;
+  align-items: center;
+  column-gap: 10px;
 }
 
-.card__text {
-  display: flex;
-  flex-direction: column;
-  row-gap: 10px;
-  opacity: var(--text-elevation-high);
+.card__title-icon {
+  width: auto;
+  height: 32px;
 }
 
-.card__title {
-  font-weight: bold;
-  font-size: 18px;
+.card__title-text {
+  font-size: 22px;
+}
+
+.card__title-text[data-color-id="React"] {
+  color: #1adcff;
+}
+
+.card__title-text[data-color-id="JavaScript"] {
+  color: #fdd83c;
 }
 
 .card__desc {
   opacity: var(--text-elevation-medium);
-  line-height: 1.4rem;
+  line-height: 1.8rem;
+  text-align: center;
+  font-size: 17px;
+  height: 70px;
+  padding: 0px 10px;
 }
 
-.card__icon {
-  width: 80px;
-  height: 80px;
+.card__code {
+  flex-grow: 1;
+  width: 100%;
+  border-radius: 8px;
+  background-color: var(--color-background);
 }
 
 /* CONTENTS */

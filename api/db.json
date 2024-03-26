@@ -3,23 +3,26 @@
     {
       "cardId": 0,
       "title": "React",
-      "desc": "Library for web and native user interfaces",
-      "icon": "../logo-react.png",
-      "path": "react"
+      "desc": "The library for web and native user interfaces. Build user interfaces out of individual pieces called components written in JavaScript",
+      "icon": "../react-logo.svg",
+      "path": "react",
+      "color": "#1adcff"
     },
     {
       "cardId": 1,
       "title": "JavaScript",
-      "desc": "Scripting language to implement complex features on web pages",
-      "icon": "../logo-js.png",
-      "path": "javascript"
+      "desc": "The scripting language to implement complex features on web pages",
+      "icon": "../js-logo.svg",
+      "path": "javascript",
+      "color": "#fdd83c"
     },
     {
       "cardId": 2,
       "title": "C++",
-      "desc": "Generic language designed to humiliate generic people",
-      "icon": "../logo-cpp.png",
-      "path": "cpp"
+      "desc": "The object-oriented generic language designed to humiliate generic people",
+      "icon": "../skull.svg",
+      "path": "cpp",
+      "color": "#fff"
     }
   ],
   "reactContents": [

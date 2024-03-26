@@ -1,19 +1,12 @@
-import { Link, useLoaderData } from "react-router-dom";
-import { Card } from "../components/Card";
+import { useLoaderData } from "react-router-dom";
 import { getCards } from "../../api/cards";
+import { CardsList } from "../components/CardsList";
 
-function CardsList() {
+function Home() {
   const cards = useLoaderData();
   return (
-    <div className="cards-list">
-      {cards.map((card) => {
-        const { cardId, title, desc, icon, path } = card;
-        return (
-          <Link key={cardId} to={path}>
-            <Card title={title} desc={desc} icon={icon} />
-          </Link>
-        );
-      })}
+    <div className="home">
+      <CardsList cards={cards} />
     </div>
   );
 }
@@ -23,6 +16,6 @@ async function loader({ request: { signal } }) {
 }
 
 export const homeRoute = {
-  element: <CardsList />,
+  element: <Home />,
   loader,
 };
